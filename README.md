@@ -6,7 +6,7 @@ API built for `DEEL`
 
 ## Stack
 
-This API is built using [Typescript](https://www.typescriptlang.org/) and,[Express](https://expressjs.com/), [Node](https://nodejs.org/en/) and [Sequalize](https://sequelize.org/)
+This API is built using [Typescript](https://www.typescriptlang.org/) and,[Express](https://expressjs.com/), [Node](https://nodejs.org/en/) and [Sequalize](https://sequelize.org/).
 
 ## Getting Started 🏁
 
@@ -42,6 +42,7 @@ The request body in order to create or update the user needs to be in the follow
 
 - Add integration tests for the endpoints
 - Add Unit tests for the helper functions
-- Added service files which do the `sql` queries
-- created a simple pipeline using `github actions`
-- create a very simple frontend using `react`
+- Added service files that are responsible for the `sql` queries
+- Create a simple pipeline using `github actions`
+- Create a very simple front end using `react`
+- Use husk to valdate git commits
