@@ -40,7 +40,7 @@ The request body in order to create or update the user needs to be in the follow
 
 **If I had more time I would have done the following**:
 
-- Add integration tests for the endpoints
+- Add integration tests for the endpoints using [SuperTest](https://www.npmjs.com/package/supertest)
 - Add Unit tests for the helper functions
 - Added service files that are responsible for the `sql` queries
 - Create a simple pipeline using `github actions`
