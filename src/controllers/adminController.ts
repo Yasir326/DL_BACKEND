@@ -2,6 +2,23 @@ import { Request, Response } from 'express';
 import { sequelize } from '../entities/model';
 import { Op } from 'sequelize';
 import { defaultLimit } from '../common';
+import { ContractType, JobType, ProfileType } from '../types/types';
+
+type ResultType = {
+  paid: number;
+  Contract: {
+    ClientId: number;
+    Client: {
+      firstName: string;
+      lastName: string;
+      profession: string;
+      balance: number;
+      type: string;
+      createdAt: string;
+      updatedAt: string;
+    };
+  };
+};
 
 export const bestProfession = async (
   req: Request,
@@ -65,7 +82,7 @@ export const bestClient = async (
     const { Profile } = req.app.get('models');
     const { Contract } = req.app.get('models');
 
-    const result = await Job.findAll({
+    const results = await Job.findAll({
       where: {
         paymentDate: { [Op.gte]: start, [Op.lte]: end }
       },
@@ -74,18 +91,28 @@ export const bestClient = async (
         attributes: ['ClientId'],
         include: {
           model: Profile,
-          attributes: ['profession'],
           as: 'Client'
         }
       },
-      attributes: [[sequelize.fn('sum', sequelize.col('price')), 'total_paid']],
+      attributes: [[sequelize.fn('sum', sequelize.col('price')), 'paid']],
       group: 'Contract.ClientId',
       order: [['paid', 'DESC']],
       limit
     });
 
-    return res.status(200).json(result);
+    const bestClients = mapBestClients(results);
+
+    return res.status(200).json(bestClients);
   } catch (err: any) {
     return res.status(500).json('Internal Server Error');
   }
 };
+
+function mapBestClients(results: Array<ResultType>) {
+  return results.map((result) => ({
+    id: result.Contract.ClientId,
+    fullName:
+      result.Contract.Client.firstName + ' ' + result.Contract.Client.lastName,
+    totalPaid: result.paid
+  }));
+}
