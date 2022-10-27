@@ -46,3 +46,4 @@ The request body in order to create or update the user needs to be in the follow
 - Create a simple pipeline using `github actions`
 - Create a very simple front end using `react`
 - Use husk to valdate git commits
+- Convert `seedDb.js` and `model.js` into a typescript file
