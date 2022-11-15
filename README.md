@@ -1,4 +1,4 @@
-# DEEL BACKEND
+# DL BACKEND
 
 ## About
 
@@ -36,9 +36,17 @@ This API is built using [Typescript](https://www.typescriptlang.org/) and,[Expre
 
 The request body in order to create or update the user needs to be in the following format:
 
-## If Had More Time
+## TODO
 
-**If I had more time I would have done the following**:
+**The following bugs need to be fixed**
+
+- Pay job, no locking or transaction management/isolation levels included on the tables used to fetch job data, at risk of concurrency issues.
+- Pay job no check if job has already been paid.
+- Update balance not including the check query in the transaction, also open to concurrency issues.
+- Malformed JSON in deposit endpoint request returns a stack trace to API client.
+- Admin best profession not returning the highest performing profession (incorrect aggregate column)
+
+**The following needs to be done to improve the code quality**:
 
 - Add integration tests for the endpoints using [SuperTest](https://www.npmjs.com/package/supertest)
 - Add Unit tests for the helper functions
